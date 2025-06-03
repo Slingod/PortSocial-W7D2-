@@ -7,15 +7,6 @@
   padding: 2rem;
   background-color: #f5f7fa;
 
-  .loading-text,
-  .error-text {
-    text-align: center;
-    font-size: 1.1rem;
-    color: vars.$text-dark;
-    margin-top: 2rem;
-  }
-
-  // --- Section Profil (GitHubOverview) ---
   .overview-card {
     display: flex;
     flex-wrap: wrap;
@@ -52,25 +43,24 @@
         line-height: 1.4;
       }
 
+      // Changement ici : on cible .overview-card__stats et ses div enfants
       &__stats {
-        list-style: none;
-        padding: 0;
         display: flex;
         flex-wrap: wrap;
         gap: 1.5rem;
         margin: 0.8rem 0;
+      }
 
-        li {
-          display: flex;
-          align-items: center;
-          font-size: 0.95rem;
-          color: vars.$text-dark;
+      .overview-card__stat-item {
+        display: flex;
+        align-items: center;
+        font-size: 0.95rem;
+        color: vars.$text-dark;
 
-          .overview-card__icon {
-            display: inline-block;
-            margin-right: 0.4rem;
-            font-size: 1.2rem;
-          }
+        .overview-card__icon {
+          display: inline-block;
+          margin-right: 0.4rem;
+          font-size: 1.2rem;
         }
       }
 
@@ -92,7 +82,6 @@
     }
   }
 
-  // --- Section Dépôts ---
   .repos-section {
     &__title {
       font-size: 1.8rem;
@@ -108,7 +97,6 @@
     }
   }
 
-  // --- Style pour chaque RepoCard ---
   .repo-card {
     background-color: #ffffff;
     border-radius: vars.$border-radius;

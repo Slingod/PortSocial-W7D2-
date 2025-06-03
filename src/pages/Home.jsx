@@ -17,22 +17,23 @@ function GitHubOverview({ profile }) {
         {profile.bio && (
           <p className="overview-card__bio">{profile.bio}</p>
         )}
-        <ul className="overview-card__stats">
+        {/* Remplacement de <ul><li> par <div className="overview-card__stats"> */}
+        <div className="overview-card__stats">
           {profile.location && (
-            <li>
+            <div className="overview-card__stat-item">
               <span className="overview-card__icon">🌍</span>
               {profile.location}
-            </li>
+            </div>
           )}
-          <li>
+          <div className="overview-card__stat-item">
             <span className="overview-card__icon">👥</span>
             {profile.followers} followers · {profile.following} following
-          </li>
-          <li>
+          </div>
+          <div className="overview-card__stat-item">
             <span className="overview-card__icon">🏢</span>
             {profile.company || '–'}
-          </li>
-        </ul>
+          </div>
+        </div>
         <a
           className="overview-card__btn"
           href={profile.html_url}
