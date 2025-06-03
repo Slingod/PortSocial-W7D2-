@@ -1,0 +1,42 @@
+@use '../../styles/_variables' as vars;
+@use '../../styles/_mixins';
+
+.works-page {
+  padding: 2rem;
+
+  &__title {
+    font-size: 2rem;
+    color: vars.$primary-color;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  &__nav {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  &__link {
+    padding: 0.5rem 1rem;
+    border: 2px solid vars.$primary-color;
+    border-radius: vars.$border-radius;
+    color: vars.$primary-color;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      background-color: vars.$primary-color;
+      color: #fff;
+    }
+  }
+
+  &__outlet {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+}

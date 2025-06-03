@@ -1,0 +1,62 @@
+@use '../styles/_variables' as vars;
+
+.page--about {
+  &__social {
+    margin-top: 2rem;
+    text-align: center;
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: vars.$primary-color;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      display: inline-flex;
+      gap: 1.5rem;
+    }
+
+    li {
+      a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: vars.$text-dark;
+        font-weight: bold;
+        transition: color 0.2s ease;
+
+        &:hover {
+          color: vars.$primary-color;
+        }
+
+        .icon {
+          width: 24px;
+          height: 24px;
+          margin-right: 0.5rem;
+        }
+
+        .icon--github {
+          /* GitHub */
+          fill: vars.$text-dark;
+          transition: fill 0.2s ease;
+
+          &:hover {
+            fill: vars.$primary-color;
+          }
+        }
+
+        .icon--linkedin {
+          /* LinkedIn */
+          fill: vars.$text-dark;
+          transition: fill 0.2s ease;
+
+          &:hover {
+            fill: vars.$primary-color;
+          }
+        }
+      }
+    }
+  }
+}

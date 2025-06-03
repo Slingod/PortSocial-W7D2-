@@ -1,0 +1,33 @@
+@use '../styles/_variables' as vars;
+@use '../styles/_mixins';
+@use 'sass:math';
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: vars.$border-radius;
+  background-color: #fff;
+  padding: 1rem;
+  width: 200px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    // On utilise math.div() pour diviser la variable sans avertissement
+    border-radius: math.div(vars.$border-radius, 2);
+    margin-bottom: 0.5rem;
+  }
+
+  &__title {
+    font-size: 1.1rem;
+    color: vars.$text-dark;
+    margin: 0;
+  }
+}
