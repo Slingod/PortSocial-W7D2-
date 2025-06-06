@@ -1,8 +1,8 @@
 import React from 'react';
 import './About.scss';
 
-import githubLogo from '../assets/Githublogo.webp';
-import linkedinLogo from '../assets/linkedinlogo.webp';
+import githubLogo from '../assets/github-tile.svg';
+import linkedinLogo from '../assets/linkedin-tile.svg';
 
 export default function About() {
   return (
