@@ -1,6 +1,7 @@
-import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 
+import Header from './components/Header.jsx';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -10,14 +11,26 @@ import CaseStudy from './pages/Works/CaseStudy';
 import ConcretCase from './pages/Works/ConcretCase';
 
 export default function App() {
+  // ——— Gestion du thème (Jour/Nuit) ———
+
+  const storedTheme = localStorage.getItem('theme') || 'light';
+  const [theme, setTheme] = useState(storedTheme);
+
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+
+  const toggleTheme = () => {
+    setTheme((current) => (current === 'light' ? 'dark' : 'light'));
+  };
+
   return (
     <div className="app-container">
-      <nav className="nav-main">
-        <Link to="/" className="nav-main__link">Accueil</Link>
-        <Link to="/about" className="nav-main__link">À Propos</Link>
-        <Link to="/works" className="nav-main__link">Travaux</Link>
-        <Link to="/contact" className="nav-main__link">Contact</Link>
-      </nav>
+
+      <Header theme={theme} toggleTheme={toggleTheme} />
 
       <main className="main-content">
         <Routes>

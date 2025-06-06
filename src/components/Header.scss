@@ -1,0 +1,43 @@
+@use '../styles/_variables' as vars;
+
+.header {
+  background-color: var(--bg-color);
+  padding: 0.75rem 1rem;
+  box-shadow: 0 2px 6px var(--shadow-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header__link {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 500;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--link-hover-color);
+  }
+}
+
+.header__theme-btn {
+  margin-left: auto;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  border-radius: 4px;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '../../components/Card';
 
 export default function Exercises() {
-  // Liste des projets « exercices » avec leur titre et URL associée
+
   const projects = [
     {
       id: 'passwordgen',

@@ -1,16 +1,14 @@
 @use '../styles/_variables' as vars;
-@use '../styles/_mixins';
 @use 'sass:math';
-@use 'sass:color';
 
 .page--home {
   padding: 2rem;
-  background-color: #f5f7fa;
+  background-color: var(--bg-color);
 
   .overview-card {
     display: flex;
     flex-wrap: wrap;
-    background-color: #ffffff;
+    background-color: var(--card-bg);
     border-radius: vars.$border-radius;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     padding: 1.5rem;
@@ -23,7 +21,7 @@
       height: 120px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid vars.$primary-color;
+      border: 3px solid var(--link-color);
     }
 
     &__info {
@@ -33,50 +31,49 @@
       &__name {
         font-size: 2rem;
         margin: 0;
-        color: vars.$primary-color;
+        color: var(--text-color);
       }
 
       &__bio {
         font-size: 1rem;
         margin: 0.5rem 0;
-        color: vars.$text-dark;
+        color: var(--text-color);
         line-height: 1.4;
       }
 
-      // Changement ici : on cible .overview-card__stats et ses div enfants
       &__stats {
+        list-style: none;
+        padding: 0;
         display: flex;
         flex-wrap: wrap;
         gap: 1.5rem;
         margin: 0.8rem 0;
-      }
 
-      .overview-card__stat-item {
-        display: flex;
-        align-items: center;
-        font-size: 0.95rem;
-        color: vars.$text-dark;
+        li {
+          display: flex;
+          align-items: center;
+          font-size: 0.95rem;
+          color: var(--text-color);
 
-        .overview-card__icon {
-          display: inline-block;
-          margin-right: 0.4rem;
-          font-size: 1.2rem;
+          strong {
+            margin-right: 0.3rem;
+          }
         }
       }
 
-      &__btn {
+      &__link {
         display: inline-block;
         margin-top: 1rem;
         padding: 0.5rem 1.2rem;
-        background-color: vars.$primary-color;
-        color: #fff;
+        background-color: var(--link-color);
+        color: var(--button-text);
         text-decoration: none;
         font-size: 0.95rem;
         border-radius: math.div(vars.$border-radius, 2);
         transition: background-color 0.2s ease;
 
         &:hover {
-          background-color: color.adjust(vars.$primary-color, $lightness: -8%);
+          background-color: var(--link-hover-color);
         }
       }
     }
@@ -85,7 +82,7 @@
   .repos-section {
     &__title {
       font-size: 1.8rem;
-      color: vars.$primary-color;
+      color: var(--link-color);
       margin-bottom: 1rem;
       text-align: center;
     }
@@ -98,9 +95,9 @@
   }
 
   .repo-card {
-    background-color: #ffffff;
+    background-color: var(--card-bg);
     border-radius: vars.$border-radius;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 3px 10px var(--shadow-color);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -108,12 +105,12 @@
 
     &:hover {
       transform: translateY(-4px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 6px 16px var(--shadow-color);
     }
 
     &__header {
       padding: 1rem;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px solid var(--card-border);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -122,7 +119,7 @@
     &__name {
       font-size: 1.1rem;
       margin: 0;
-      color: vars.$text-dark;
+      color: var(--text-color);
       word-break: break-word;
     }
 
@@ -135,7 +132,7 @@
     &__desc {
       padding: 0 1rem;
       font-size: 0.9rem;
-      color: vars.$text-light;
+      color: var(--text-color);
       flex-grow: 1;
       margin: 0.5rem 0;
       line-height: 1.3;
@@ -143,8 +140,8 @@
 
     &__footer {
       padding: 0.75rem 1rem;
-      background-color: #f9f9f9;
-      border-top: 1px solid #ddd;
+      background-color: var(--card-bg);
+      border-top: 1px solid var(--card-border);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -152,20 +149,20 @@
 
     &__forks {
       font-size: 0.9rem;
-      color: vars.$text-dark;
+      color: var(--text-color);
     }
 
     &__link {
       padding: 0.4rem 0.8rem;
-      background-color: vars.$primary-color;
-      color: #fff;
+      background-color: var(--link-color);
+      color: var(--button-text);
       text-decoration: none;
       font-size: 0.9rem;
       border-radius: math.div(vars.$border-radius, 2);
       transition: background-color 0.2s ease;
 
       &:hover {
-        background-color: color.adjust(vars.$primary-color, $lightness: -8%);
+        background-color: var(--link-hover-color);
       }
     }
   }

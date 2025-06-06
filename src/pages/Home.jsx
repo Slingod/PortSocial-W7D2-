@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Home.scss';
 
-// Composant pour afficher le profil GitHub dans une “card”
 function GitHubOverview({ profile }) {
   return (
     <div className="overview-card">
@@ -17,7 +16,7 @@ function GitHubOverview({ profile }) {
         {profile.bio && (
           <p className="overview-card__bio">{profile.bio}</p>
         )}
-        {/* Remplacement de <ul><li> par <div className="overview-card__stats"> */}
+
         <div className="overview-card__stats">
           {profile.location && (
             <div className="overview-card__stat-item">
@@ -128,10 +127,9 @@ export default function Home() {
 
   return (
     <div className="page page--home">
-      {/* Section Profil */}
+
       <GitHubOverview profile={profile} />
 
-      {/* Section Dépôts populaires */}
       <div className="repos-section">
         <h2 className="repos-section__title">Dépôts populaires</h2>
         <div className="repos-section__grid">

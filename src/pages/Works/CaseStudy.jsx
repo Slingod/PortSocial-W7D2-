@@ -2,7 +2,7 @@ import React from 'react';
 import Card from '../../components/Card';
 
 export default function CaseStudy() {
-  // Liste des projets “Case Study” avec titre et URL associée
+
   const projects = [
     {
       id: 'tic-tak-to',

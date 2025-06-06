@@ -12,7 +12,7 @@ export default function About() {
         Je m’appelle Julien Sicard, développeur front-end passionné par React et le design.
         Ici, tu découvriras mon parcours, mes compétences et mes projets.
       </p>
-      
+
       {/* Bloc “Mes Réseaux / Profil GitHub et LinkedIn” */}
       <div className="page--about__social">
         <h2>Retrouve-moi sur :</h2>
@@ -27,7 +27,7 @@ export default function About() {
                 src={githubLogo}
                 alt="GitHub"
                 className="icon icon--github"
-              />{' '}
+              />
               Mon profil GitHub
             </a>
           </li>
@@ -41,7 +41,7 @@ export default function About() {
                 src={linkedinLogo}
                 alt="LinkedIn"
                 className="icon icon--linkedin"
-              />{' '}
+              />
               Mon profil LinkedIn
             </a>
           </li>
