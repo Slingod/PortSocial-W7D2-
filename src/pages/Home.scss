@@ -5,6 +5,7 @@
   padding: 2rem;
   background-color: var(--bg-color);
 
+  /* ─── Carte Profil ─────────────────────────────────────────────────────── */
   .overview-card {
     display: flex;
     flex-wrap: wrap;
@@ -42,26 +43,26 @@
       }
 
       &__stats {
-        list-style: none;
-        padding: 0;
         display: flex;
         flex-wrap: wrap;
         gap: 1.5rem;
         margin: 0.8rem 0;
+        padding: 0;
+        list-style: none;
 
-        li {
+        .overview-card__stat-item {
           display: flex;
           align-items: center;
           font-size: 0.95rem;
           color: var(--text-color);
 
-          strong {
-            margin-right: 0.3rem;
+          .overview-card__icon {
+            margin-right: 0.4rem;
           }
         }
       }
 
-      &__link {
+      &__btn {
         display: inline-block;
         margin-top: 1rem;
         padding: 0.5rem 1.2rem;
@@ -79,6 +80,7 @@
     }
   }
 
+  /* ─── Section Dépôts populaires ────────────────────────────────────────── */
   .repos-section {
     &__title {
       font-size: 1.8rem;
@@ -163,6 +165,150 @@
 
       &:hover {
         background-color: var(--link-hover-color);
+      }
+    }
+  }
+
+  /* ─── Section Compétences ─────────────────────────────────────────────── */
+  .skills-section {
+    margin-top: 3rem;
+
+    &__title {
+      font-size: 1.8rem;
+      color: var(--link-color);
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    &__category {
+      margin-bottom: 2rem;
+
+      & + & {
+        border-top: 1px solid var(--card-border);
+        padding-top: 2rem;
+      }
+    }
+
+    &__subtitle {
+      font-size: 1.4rem;
+      color: var(--text-color);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    &__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1.5rem;
+      padding: 0 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+  }
+
+  .skill-item {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: vars.$border-radius;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 16px var(--shadow-color);
+    }
+
+    &__icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 0.5rem;
+      object-fit: contain;
+    }
+
+    &__label {
+      font-size: 0.95rem;
+      color: var(--text-color);
+      font-weight: 500;
+    }
+  }
+
+/* ─── Section Expériences ───────────────────────────────────────────────── */
+  .experience-section {
+    margin-top: 4rem;
+
+    &__title {
+      font-size: 2rem;
+      color: var(--link-color);
+      text-align: center;
+      margin-bottom: 2rem;
+      /* Ligne décorative supprimée */
+    }
+
+    &__category {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: vars.$border-radius;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 3px 8px var(--shadow-color);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 16px var(--shadow-color);
+      }
+
+      & + & {
+        margin-top: 2rem;
+      }
+    }
+
+    &__subtitle {
+      font-size: 1.5rem;
+      color: var(--text-color);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      text-align: center;
+      /* Ligne décorative supprimée */
+    }
+
+    &__list {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 800px;
+      color: var(--text-color);
+
+      li {
+        margin-bottom: 0.75rem;
+        line-height: 1.5;
+
+        strong {
+          font-weight: 600;
+          color: var(--text-color);
+        }
+      }
+    }
+
+    &__text {
+      max-width: 800px;
+      margin: 0 auto;
+      color: var(--text-color);
+      line-height: 1.6;
+      font-size: 1rem;
+
+      strong {
+        font-weight: 600;
+        color: var(--text-color);
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 1.2rem;
       }
     }
   }
