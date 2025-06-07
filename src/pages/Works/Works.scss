@@ -14,17 +14,19 @@
   &__nav {
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 1rem; /* Réduit légèrement l'espacement pour tenir sur mobile */
+    flex-wrap: wrap; /* Permet un retour à la ligne si vraiment nécessaire */
     margin-bottom: 2rem;
   }
 
   &__link {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.75rem; /* Ajusté pour réduire la largeur */
     border: 2px solid vars.$primary-color;
     border-radius: vars.$border-radius;
     color: vars.$primary-color;
     text-decoration: none;
     font-weight: bold;
+    white-space: nowrap; /* Empêche le retour à la ligne du texte */
     transition: background-color 0.2s ease, color 0.2s ease;
 
     &:hover {
@@ -38,5 +40,19 @@
     flex-wrap: wrap;
     gap: 1rem;
     justify-content: center;
+  }
+}
+
+/* Ajustements spécifiques aux petits écrans */
+@media (max-width: 480px) {
+  .works-page {
+    &__nav {
+      gap: 0.5rem; /* Réduit encore l'espacement sur très petit écran */
+    }
+
+    &__link {
+      padding: 0.4rem 0.6rem;
+      font-size: 0.9rem; /* Légère réduction de la taille du texte */
+    }
   }
 }

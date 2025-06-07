@@ -11,7 +11,7 @@
 .nav-main {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;  /* Réduit légèrement l’espacement pour mieux tenir sur mobile */
 
   /* Lien de navigation */
   &__link {
@@ -21,6 +21,7 @@
     font-weight: 500;
     padding-bottom: 0.25rem;
     transition: color 0.2s ease;
+    white-space: nowrap;  /* Empêche le passage à la ligne sur mobile */
 
     &:hover {
       color: var(--link-color);
@@ -29,8 +30,6 @@
 
   /* Soulignage pour le lien actif sans changer la couleur du texte */
   &__link--active {
-    /* On conserve la couleur par défaut (var(--text-color)), donc pas de color override */
-
     &::after {
       content: '';
       position: absolute;
@@ -46,17 +45,24 @@
   /* Bouton de bascule thème */
   .theme-toggle-btn {
     margin-left: auto;
-    padding: 0.4rem 1rem;
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border: 1px solid transparent;
-    border-radius: math.div(vars.$border-radius, 2);
+    padding: 0.3rem;
+    background-color: transparent;
+    border: none;
     cursor: pointer;
-    font-size: 0.9rem;
-    transition: border-color 0.2s ease, background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease;
 
     &:hover {
-      border-color: var(--link-color);
+      opacity: 0.7;
+    }
+
+    /* Icône à l’intérieur du bouton */
+    &__icon {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
     }
   }
 }
