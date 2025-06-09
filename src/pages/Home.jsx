@@ -67,7 +67,7 @@ function RepoCard({ repo }) {
   );
 }
 
-// ─── IMPORTS ICÔNES “COMPÉTENCES” ───────────────────────────────────────────
+// ─── IMPORTS ICÔNES “COMPÉTENCES” ────────────────────────────────
 import nodejsIcon from '../assets/nodejs-icon.svg';
 import reactjsIcon from '../assets/reactjs-icon.svg';
 import vitejsIcon from '../assets/vitejsdev-icon.svg';
@@ -80,13 +80,27 @@ import html5Icon from '../assets/w3_html5-icon.svg';
 import jsIcon from '../assets/javascript-icon.svg';
 import rubyOnRailsIcon from '../assets/ruby-lang-vertical.svg';
 import rubyIcon from '../assets/ruby-lang-vertical.svg';
-// ──────────────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────
 
 export default function Home() {
   const [profile, setProfile] = useState(null);
   const [topRepos, setTopRepos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   useEffect(() => {
     async function fetchGitHubData() {
@@ -137,10 +151,10 @@ export default function Home() {
 
   return (
     <div className="page page--home">
-      {/* ─── Section Profil ──────────────────────────────────────────────────── */}
+      {/* ─── Section Profil ─────────────── */}
       <GitHubOverview profile={profile} />
 
-      {/* ─── Section Dépôts populaires ────────────────────────────────────────── */}
+      {/* ─── Section Dépôts populaires ─────────── */}
       <div className="repos-section">
         <h2 className="repos-section__title">Dépôts populaires</h2>
         <div className="repos-section__grid">
@@ -150,11 +164,11 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ─── Section Compétences ─────────────────────────────────────────────── */}
+      {/* ─── Section Compétences ─────── */}
       <section className="skills-section">
         <h2 className="skills-section__title">Compétences</h2>
 
-        {/* ── LANGAGES ─────────────────────────────────────────────────────────── */}
+        {/* ── LANGAGES ────── */}
         <div className="skills-section__category">
           <h3 className="skills-section__subtitle">Langages</h3>
           <div className="skills-section__grid">
@@ -173,7 +187,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ── BIBLIOTHÈQUES & FRAMEWORKS FRONTEND ──────────────────────────────── */}
+        {/* ── BIBLIOTHÈQUES & FRAMEWORKS FRONTEND ────────── */}
         <div className="skills-section__category">
           <h3 className="skills-section__subtitle">Bibliothèques & Frameworks Frontend</h3>
           <div className="skills-section__grid">
@@ -200,7 +214,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ── OUTILS DE DESIGN ─────────────────────────────────────────────────── */}
+        {/* ── OUTILS DE DESIGN ───── */}
         <div className="skills-section__category">
           <h3 className="skills-section__subtitle">Outils de Design</h3>
           <div className="skills-section__grid">
@@ -215,7 +229,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ── BACKEND ───────────────────────────────────────────────────────────── */}
+        {/* ── BACKEND ──────*/}
         <div className="skills-section__category">
           <h3 className="skills-section__subtitle">Backend</h3>
           <div className="skills-section__grid">
@@ -235,7 +249,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── Section Expériences ───────────────────────────────────────────────── */}
+      {/* ─── Section Expériences ──── */}
       <section className="experience-section">
         <h2 className="experience-section__title">Expériences</h2>
 
@@ -295,6 +309,16 @@ export default function Home() {
           </ul>
         </div>
       </section>
+
+      {showScrollTop && (
+        <button
+          className="scroll-to-top"
+          onClick={scrollToTop}
+          aria-label="Retour en haut"
+        >
+          ↑
+        </button>
+      )}
     </div>
   );
 }
