@@ -14,16 +14,16 @@
   }
 
   .card-twilight {
+    background: var(--card-twilight);
+    background-size: 200% 200%;
+    z-index: -1;
+    animation: twilight 8s ease infinite;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     border-radius: vars.$border-radius;
-    background: linear-gradient(135deg, rgba(255, 0, 0, 0.7), rgba(255, 165, 0, 0.7), rgba(255, 255, 0, 0.7));
-    background-size: 200% 200%;
-    z-index: -1;
-    animation: twilight 8s ease infinite;
   }
 
   @keyframes twilight {
@@ -55,6 +55,18 @@
 
     .card-twilight {
       background: linear-gradient(135deg, rgba(255, 153, 102, 0.8), rgba(255, 102, 153, 0.8), rgba(153, 102, 255, 0.8));
+    }
+  }
+
+  /* Style pour le mode nuit */
+  .night-mode {
+    .card-twilight {
+      background: linear-gradient(
+        135deg,
+        rgba(247, 0, 255, 0.7),
+        rgba(255, 165, 0, 0.7),
+        rgba(255, 255, 0, 0.7)
+      );
     }
   }
 
@@ -417,4 +429,16 @@
     height: 24px;
     object-fit: contain;
   }
+
+  .background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -10;
+  pointer-events: none;
+  opacity: 0.45;
+}
 }
