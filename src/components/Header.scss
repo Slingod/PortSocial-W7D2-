@@ -3,7 +3,7 @@
 
 .header {
   padding: 1rem 2rem;
-  background-color: var(--card-bg);
+  background-color: var(--header-bg);
   border-bottom: 1px solid var(--card-border);
   box-shadow: 0 2px 6px var(--shadow-color);
 }
@@ -11,9 +11,8 @@
 .nav-main {
   display: flex;
   align-items: center;
-  gap: 1.5rem;  /* Réduit légèrement l’espacement pour mieux tenir sur mobile */
+  gap: 1.5rem;
 
-  /* Lien de navigation */
   &__link {
     position: relative;
     text-decoration: none;
@@ -21,14 +20,13 @@
     font-weight: 500;
     padding-bottom: 0.25rem;
     transition: color 0.2s ease;
-    white-space: nowrap;  /* Empêche le passage à la ligne sur mobile */
+    white-space: nowrap;
 
     &:hover {
       color: var(--link-color);
     }
   }
 
-  /* Soulignage pour le lien actif sans changer la couleur du texte */
   &__link--active {
     &::after {
       content: '';
@@ -42,7 +40,6 @@
     }
   }
 
-  /* Bouton de bascule thème */
   .theme-toggle-btn {
     margin-left: auto;
     padding: 0.3rem;
@@ -58,7 +55,6 @@
       opacity: 0.7;
     }
 
-    /* Icône à l’intérieur du bouton */
     &__icon {
       width: 24px;
       height: 24px;

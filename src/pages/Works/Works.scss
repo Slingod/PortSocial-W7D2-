@@ -1,6 +1,28 @@
 @use '../../styles/_variables' as vars;
 @use '../../styles/_mixins';
 
+.card-container {
+  position: relative;
+  margin-bottom: 2rem;
+  border-radius: vars.$border-radius;
+  overflow: hidden;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 2px 6px var(--shadow-color);
+  border-radius: vars.$border-radius;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
 .works-page {
   padding: 2rem;
 
@@ -14,20 +36,38 @@
   &__nav {
     display: flex;
     justify-content: center;
-    gap: 1rem; /* Réduit légèrement l'espacement pour tenir sur mobile */
-    flex-wrap: wrap; /* Permet un retour à la ligne si vraiment nécessaire */
+    gap: 1rem;
+    flex-wrap: wrap;
     margin-bottom: 2rem;
   }
 
   &__link {
-    padding: 0.5rem 0.75rem; /* Ajusté pour réduire la largeur */
+    @extend .card-container;
+    @extend .glass-effect;
+    @extend .card;
+    padding: 0.5rem 0.75rem;
     border: 2px solid vars.$primary-color;
-    border-radius: vars.$border-radius;
     color: vars.$primary-color;
     text-decoration: none;
     font-weight: bold;
-    white-space: nowrap; /* Empêche le retour à la ligne du texte */
+    white-space: nowrap;
     transition: background-color 0.2s ease, color 0.2s ease;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: vars.$border-radius;
+  background: linear-gradient(135deg, rgba(255, 0, 0, 0.7), rgba(255, 165, 0, 0.7), rgba(255, 255, 0, 0.7));
+  z-index: -1;
+  animation: twilight 8s ease infinite;
+}
+
 
     &:hover {
       background-color: vars.$primary-color;
@@ -43,16 +83,27 @@
   }
 }
 
-/* Ajustements spécifiques aux petits écrans */
 @media (max-width: 480px) {
   .works-page {
     &__nav {
-      gap: 0.5rem; /* Réduit encore l'espacement sur très petit écran */
+      gap: 0.5rem;
     }
 
     &__link {
       padding: 0.4rem 0.6rem;
-      font-size: 0.9rem; /* Légère réduction de la taille du texte */
+      font-size: 0.9rem;
     }
+  }
+}
+
+@keyframes twilight {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }

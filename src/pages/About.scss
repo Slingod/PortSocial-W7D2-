@@ -1,7 +1,29 @@
 @use '../styles/_variables' as vars;
 
+.card-container {
+  position: relative;
+  margin-bottom: 2rem;
+  border-radius: vars.$border-radius;
+  overflow: hidden;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 2px 6px var(--shadow-color);
+  border-radius: vars.$border-radius;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
 .page--about {
-  background-color: var(--bg-color);
+  /* background-color: var(--bg-color); */
   color: var(--text-color);
   padding: 2rem;
 
@@ -19,10 +41,25 @@
   }
 
   .page--about__social {
-    background-color: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: vars.$border-radius;
-    padding: 1rem;
+    @extend .card-container;
+    @extend .glass-effect;
+    @extend .card;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: vars.$border-radius;
+  background: linear-gradient(135deg, rgba(255, 0, 0, 0.7), rgba(255, 165, 0, 0.7), rgba(255, 255, 0, 0.7));
+  z-index: -1;
+  animation: twilight 8s ease infinite;
+}
+
 
     h2 {
       margin-top: 0;
@@ -63,5 +100,17 @@
         }
       }
     }
+  }
+}
+
+@keyframes twilight {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }

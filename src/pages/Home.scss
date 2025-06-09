@@ -3,79 +3,135 @@
 
 .page--home {
   padding: 2rem;
-  background-color: var(--bg-color);
+  /* background-color: var(--bg-color); */
 
-  /* ─── Carte Profil ─── */
+  /* Effet d'aube et crépuscule commun pour toutes les cartes */
+  .card-container {
+    position: relative;
+    margin-bottom: 2rem;
+    border-radius: vars.$border-radius;
+    overflow: hidden;
+  }
+
+  .card-twilight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: vars.$border-radius;
+    background: linear-gradient(135deg, rgba(255, 0, 0, 0.7), rgba(255, 165, 0, 0.7), rgba(255, 255, 0, 0.7));
+    background-size: 200% 200%;
+    z-index: -1;
+    animation: twilight 8s ease infinite;
+  }
+
+  @keyframes twilight {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* Style commun pour l'effet vitreux */
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  /* Style pour le mode jour */
+  .day-mode {
+    .glass-effect {
+      background: rgba(240, 240, 240, 0.8);
+      border: 1px solid rgba(150, 150, 150, 0.5);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-twilight {
+      background: linear-gradient(135deg, rgba(255, 153, 102, 0.8), rgba(255, 102, 153, 0.8), rgba(153, 102, 255, 0.8));
+    }
+  }
+
   .overview-card {
+    @extend .card-container;
+    @extend .glass-effect;
     display: flex;
     flex-wrap: wrap;
-    background-color: var(--card-bg);
-    border-radius: vars.$border-radius;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     padding: 1.5rem;
-    margin-bottom: 3rem;
     align-items: center;
     gap: 2rem;
+
+    &::before {
+      content: '';
+      @extend .card-twilight;
+    }
 
     &__avatar {
       width: 120px;
       height: 120px;
       border-radius: 50%;
       object-fit: cover;
-      border: 3px solid var(--link-color);
     }
 
     &__info {
       flex: 1;
       min-width: 240px;
+    }
 
-      &__name {
-        font-size: 2rem;
-        margin: 0;
-        color: var(--text-color);
-      }
+    &__name {
+      font-size: 2rem;
+      margin: 0;
+      color: var(--text-color);
+    }
 
-      &__bio {
-        font-size: 1rem;
-        margin: 0.5rem 0;
-        color: var(--text-color);
-        line-height: 1.4;
-      }
+    &__bio {
+      font-size: 1rem;
+      margin: 0.5rem 0;
+      color: var(--text-color);
+      line-height: 1.4;
+    }
 
-      &__stats {
+    &__stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 0.8rem 0;
+      padding: 0;
+      list-style: none;
+
+      .overview-card__stat-item {
         display: flex;
-        flex-wrap: wrap;
-        gap: 1.5rem;
-        margin: 0.8rem 0;
-        padding: 0;
-        list-style: none;
+        align-items: center;
+        font-size: 0.95rem;
+        color: var(--text-color);
 
-        .overview-card__stat-item {
-          display: flex;
-          align-items: center;
-          font-size: 0.95rem;
-          color: var(--text-color);
-
-          .overview-card__icon {
-            margin-right: 0.4rem;
-          }
+        .overview-card__icon {
+          margin-right: 0.4rem;
         }
       }
+    }
 
-      &__btn {
-        display: inline-block;
-        margin-top: 1rem;
-        padding: 0.5rem 1.2rem;
-        background-color: var(--link-color);
-        color: var(--button-text);
-        text-decoration: none;
-        font-size: 0.95rem;
-        border-radius: math.div(vars.$border-radius, 2);
-        transition: background-color 0.2s ease;
+    &__btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1.2rem;
+      background-color: var(--link-color);
+      color: var(--button-text);
+      text-decoration: none;
+      font-size: 0.95rem;
+      border-radius: math.div(vars.$border-radius, 2);
+      transition: background-color 0.2s ease;
+      position: relative;
+      z-index: 1;
 
-        &:hover {
-          background-color: var(--link-hover-color);
-        }
+      &:hover {
+        background-color: var(--link-hover-color);
       }
     }
   }
@@ -97,13 +153,17 @@
   }
 
   .repo-card {
-    background-color: var(--card-bg);
-    border-radius: vars.$border-radius;
-    box-shadow: 0 3px 10px var(--shadow-color);
+    @extend .card-container;
+    @extend .glass-effect;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &::before {
+      content: '';
+      @extend .card-twilight;
+    }
 
     &:hover {
       transform: translateY(-4px);
@@ -208,15 +268,19 @@
   }
 
   .skill-item {
-    background-color: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: vars.$border-radius;
+    @extend .card-container;
+    @extend .glass-effect;
     padding: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &::before {
+      content: '';
+      @extend .card-twilight;
+    }
 
     &:hover {
       transform: translateY(-4px);
@@ -237,7 +301,7 @@
     }
   }
 
-/* ─── Section Expériences ── */
+  /* ─── Section Expériences ── */
   .experience-section {
     margin-top: 4rem;
 
@@ -249,13 +313,17 @@
     }
 
     &__category {
-      background-color: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: vars.$border-radius;
+      @extend .card-container;
+      @extend .glass-effect;
       padding: 1.5rem;
       margin-bottom: 2rem;
       box-shadow: 0 3px 8px var(--shadow-color);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      &::before {
+        content: '';
+        @extend .card-twilight;
+      }
 
       &:hover {
         transform: translateY(-3px);
@@ -312,27 +380,41 @@
   }
 
   .scroll-to-top {
-    position: fixed;
-    bottom: 2.5rem;
-    right: 2.5rem;
-    z-index: 1000;
-    background: var(--link-color);
-    color: var(--button-text);
-    border: none;
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    font-size: 2rem;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    transition: background 0.2s, transform 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  @extend .card-container;
+  @extend .glass-effect;
+  position: fixed;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  z-index: 1000;
+  background: var(--link-color);
+  color: var(--button-text);
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: background 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    &:hover {
-      background: var(--link-hover-color);
-      transform: translateY(-4px) scale(1.08);
-    }
+  &::before {
+    content: '';
+    @extend .card-twilight;
+    border-radius: 50%; 
+  }
+
+  &:hover {
+    background: var(--link-hover-color);
+    transform: translateY(-4px) scale(1.08);
+  }
+}
+
+  .scroll-to-top__icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
   }
 }
