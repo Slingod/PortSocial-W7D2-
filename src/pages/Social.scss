@@ -1,0 +1,207 @@
+@use '../styles/_variables' as vars;
+@use 'sass:math';
+
+.social-page {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+
+  // Styles partagés (comme sur Home)
+  .card-container {
+    position: relative;
+    margin-bottom: 1.5rem;
+    border-radius: vars.$border-radius;
+    overflow: hidden;
+  }
+
+  .card-twilight {
+    background: var(--card-twilight);
+    background-size: 200% 200%;
+    z-index: -1;
+    animation: twilight 8s ease infinite;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: vars.$border-radius;
+  }
+
+  @keyframes twilight {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  // Modes jour/nuit
+  .day-mode {
+    .glass-effect {
+      background: rgba(240, 240, 240, 0.8);
+      border: 1px solid rgba(150, 150, 150, 0.5);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-twilight {
+      background: linear-gradient(135deg, rgba(255, 153, 102, 0.8), rgba(255, 102, 153, 0.8), rgba(153, 102, 255, 0.8));
+    }
+  }
+
+  .night-mode {
+    .card-twilight {
+      background: linear-gradient(
+        135deg,
+        rgba(247, 0, 255, 0.7),
+        rgba(255, 165, 0, 0.7),
+        rgba(255, 255, 0, 0.7)
+      );
+    }
+  }
+
+  // Titre
+  h1 {
+    text-align: center;
+    color: var(--link-color);
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    margin-bottom: 1rem;
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius);
+    padding: 0.5rem;
+  }
+
+  button {
+    margin-right: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--link-color);
+    color: var(--button-text);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--link-hover-color);
+    }
+  }
+
+  // Liste des posts
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      @extend .card-container;
+      @extend .glass-effect;
+      padding: 1rem;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      &::before {
+        content: '';
+        @extend .card-twilight;
+      }
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 16px var(--shadow-color);
+      }
+
+      h3 {
+        margin: 0;
+        color: var(--link-color);
+      }
+
+      p {
+        margin: 0.5rem 0;
+      }
+
+      small {
+        color: var(--text-secondary);
+      }
+
+      div {
+        margin-top: 0.5rem;
+
+        button {
+          background-color: var(--button-bg);
+
+          &:hover {
+            background-color: var(--button-hover-bg);
+          }
+        }
+      }
+    }
+  }
+
+  // Carte individuelle de post
+  .post-card {
+    @extend .card-container;
+    @extend .glass-effect;
+    padding: 1rem;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &::before {
+      content: '';
+      @extend .card-twilight;
+    }
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px var(--shadow-color);
+    }
+
+    .post-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h3 {
+        margin: 0;
+        color: var(--link-color);
+      }
+
+      small {
+        color: var(--text-secondary);
+      }
+    }
+
+    p {
+      margin: 0.5rem 0;
+      color: var(--text-color);
+    }
+
+    .post-actions {
+      display: flex;
+      gap: 0.5rem;
+
+      button {
+        background-color: var(--button-bg);
+        border: none;
+        border-radius: var(--border-radius);
+        padding: 0.5rem;
+        cursor: pointer;
+
+        &:hover {
+          background-color: var(--button-hover-bg);
+        }
+      }
+    }
+  }
+}

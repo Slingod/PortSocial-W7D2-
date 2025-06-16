@@ -9,41 +9,44 @@ import Works from './pages/Works/Works';
 import Exercises from './pages/Works/Exercises';
 import CaseStudy from './pages/Works/CaseStudy';
 import ConcretCase from './pages/Works/ConcretCase';
+import Social from './pages/Social';
+import Auth from './pages/Auth'; // Page dédiée pour Connexion et Inscription
+
+import AuthProvider from './contexts/AuthProvider';
 
 export default function App() {
-  // ——— Gestion du thème (Jour/Nuit) ———
-
   const storedTheme = localStorage.getItem('theme') || 'light';
   const [theme, setTheme] = useState(storedTheme);
-
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-
   const toggleTheme = () => {
     setTheme((current) => (current === 'light' ? 'dark' : 'light'));
   };
 
   return (
-    <div className="app-container">
+    <AuthProvider>
+      <div className={`app app--${theme}`}>
+        <Header theme={theme} toggleTheme={toggleTheme} />
 
-      <Header theme={theme} toggleTheme={toggleTheme} />
-
-      <main className="main-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/works" element={<Works />}>
-            <Route path="exercises" element={<Exercises />} />
-            <Route path="case-study" element={<CaseStudy />} />
-            <Route path="concret-case" element={<ConcretCase />} />
-          </Route>
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-      </main>
-    </div>
+        <main className="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/works" element={<Works />}>
+              <Route path="exercises" element={<Exercises />} />
+              <Route path="case-study" element={<CaseStudy />} />
+              <Route path="concret-case" element={<ConcretCase />} />
+            </Route>
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/social" element={<Social />} />
+            <Route path="/auth" element={<Auth />} /> {/* Page Connexion/Inscription */}
+          </Routes>
+        </main>
+      </div>
+    </AuthProvider>
   );
 }

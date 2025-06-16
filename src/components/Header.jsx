@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import './Header.scss';
-
-// Assurez-vous que moon.svg et sun.svg se trouvent bien dans src/assets/
-import moonIcon from '../assets/moon.svg';
-import sunIcon from '../assets/sun.svg';
+import AuthContext from '../contexts/AuthContext';
 
 export default function Header({ theme, toggleTheme }) {
+  const { user, logout } = useContext(AuthContext);
+
   return (
     <header className="header">
+      <h1>Mon Portfolio</h1>
       <nav className="nav-main">
         <NavLink
           to="/"
@@ -43,14 +43,25 @@ export default function Header({ theme, toggleTheme }) {
         >
           Contact
         </NavLink>
-
+        {user && (
+          <NavLink
+            to="/social"
+            className={({ isActive }) =>
+              isActive ? 'nav-main__link nav-main__link--active' : 'nav-main__link'
+            }
+          >
+            Réseau Social
+          </NavLink>
+        )}
+        <div className="spacer" />
         <button className="theme-toggle-btn" onClick={toggleTheme}>
-          {theme === 'light' ? (
-            <img src={moonIcon} alt="Passer en mode Nuit" className="theme-toggle-btn__icon" />
-          ) : (
-            <img src={sunIcon} alt="Passer en mode Jour" className="theme-toggle-btn__icon" />
-          )}
+          {theme === 'light' ? '🌙' : '☀️'}
         </button>
+        {user ? (
+          <button className="logout-btn" onClick={logout}>Déconnexion</button>
+        ) : (
+          <NavLink to="/auth" className="nav-main__link">Connexion</NavLink>
+        )}
       </nav>
     </header>
   );

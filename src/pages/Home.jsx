@@ -91,7 +91,7 @@ export default function Home() {
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   // Ajoute ce state pour détecter le mode nuit
-  const [isDark, setIsDark] = useState(false);
+  // const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -134,15 +134,15 @@ export default function Home() {
     fetchGitHubData();
   }, []);
 
-  useEffect(() => {
-    // Vérifie si le body ou html a l'attribut data-theme="dark"
-    const observer = new MutationObserver(() => {
-      setIsDark(document.documentElement.getAttribute('data-theme') === 'dark');
-    });
-    observer.observe(document.documentElement, { attributes: true });
-    setIsDark(document.documentElement.getAttribute('data-theme') === 'dark');
-    return () => observer.disconnect();
-  }, []);
+  // useEffect(() => {
+  //   // Vérifie si le body ou html a l'attribut data-theme="dark"
+  //   const observer = new MutationObserver(() => {
+  //     setIsDark(document.documentElement.getAttribute('data-theme') === 'dark');
+  //   });
+  //   observer.observe(document.documentElement, { attributes: true });
+  //   setIsDark(document.documentElement.getAttribute('data-theme') === 'dark');
+  //   return () => observer.disconnect();
+  // }, []);
 
   if (loading) {
     return (
@@ -164,17 +164,6 @@ export default function Home() {
 
   return (
     <div className="page page--home">
-      {/* Vidéo de fond */}
-      <video
-        className="background-video"
-        autoPlay
-        loop
-        muted
-        playsInline
-        key={isDark ? "night" : "day"}
-      >
-        <source src={isDark ? "/Flamme.mp4" : "/sunset.mp4"} type="video/mp4" />
-      </video>
 
       {/* ─── Section Profil ─────────────── */}
       <GitHubOverview profile={profile} />
