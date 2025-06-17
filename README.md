@@ -161,3 +161,182 @@ npm run dev
 N’hésitez pas à ouvrir une issue sur GitHub ou à me contacter via LinkedIn (https://www.linkedin.com/in/Slingod) pour toute question, suggestion ou opportunité de collaboration.
 
 Julien Sicard – Développeur Front-end et Back-end
+
+
+# Portfolio Social App
+
+Ce projet est une application web de type réseau social, développée avec **React** (frontend) et **Node.js/Express** (backend), permettant la création de posts, l’authentification, les likes/dislikes, et la gestion des utilisateurs.
+
+---
+
+## 🚀 Fonctionnalités principales
+
+- Création de compte utilisateur (inscription/connexion)
+- Création, suppression, affichage de posts
+- Like/Dislike sur chaque post (1 seul like ou dislike par utilisateur et par post)
+- Suppression de ses propres posts
+- Suppression de son compte (à venir)
+- Gestion des droits (seul l’auteur ou un admin peut supprimer un post)
+- Mode jour/nuit, effets visuels, PWA (à venir)
+
+---
+
+## 🗂️ Structure du projet
+
+```
+Portfolio/
+├── services/
+│   ├── auth/         # Service d'authentification (Express)
+│   ├── posts/        # Service de gestion des posts (Express)
+│   ├── server.js     # Point d'entrée backend (monte les routes)
+├── src/
+│   ├── pages/        # Pages React (Social, Auth, etc.)
+│   ├── contexts/     # Contexts React (AuthProvider, etc.)
+│   ├── styles/       # Fichiers SCSS/variables
+│   └── main.jsx      # Entrée frontend
+├── App.jsx           # Routing principal React
+├── package.json      # Dépendances frontend
+└── .env              # Variables d'environnement (à créer)
+```
+
+---
+
+## ⚙️ Prérequis
+
+- [Node.js](https://nodejs.org/) (v18+ recommandé)
+- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
+- [Git](https://git-scm.com/)
+
+---
+
+## 🛠️ Installation
+
+1. **Clone le dépôt**
+
+   ```bash
+   git clone git@github.com:Slingod/PortSocial-W7D2-.git
+   cd portfolio-social-app/Portfolio
+   ```
+
+   ou
+
+   ```bash
+   git clone https://github.com/Slingod/PortSocial-W7D2-.git
+   cd portfolio-social-app/Portfolio
+   ```
+
+2. **Installe les dépendances du frontend**
+
+   ```bash
+   npm install
+   ```
+
+3. **Installe les dépendances du backend (pour chaque service)**
+
+   ```bash
+   cd services/auth
+   npm install
+   cd ../posts
+   npm install
+   cd ../..   # Reviens à la racine Portfolio
+   ```
+
+4. **Crée un fichier `.env` à la racine de Portfolio**
+
+   ```env
+   JWT_SECRET=change_me
+   PORT=4002
+   ```
+
+---
+
+## ▶️ Lancement du projet
+
+### 1. **Lancer le backend**
+
+Depuis le dossier `Portfolio` :
+
+```bash
+node services/server.js
+```
+
+Le backend sera disponible sur [http://localhost:4002](http://localhost:4002).
+
+### 2. **Lancer le frontend**
+
+Dans un autre terminal, toujours dans `Portfolio` :
+
+```bash
+npm run dev
+```
+
+Le frontend sera disponible sur [http://localhost:5173](http://localhost:5173).
+
+---
+
+## 👤 Authentification
+
+- **Inscription** : via `/auth/register` (frontend ou API)
+- **Connexion** : via `/auth/login` (frontend ou API)
+- Un token JWT est utilisé pour sécuriser les routes protégées (création/suppression de posts, like/dislike, etc.)
+
+---
+
+## 📦 Commandes utiles
+
+- `npm run dev` : démarre le frontend en mode développement (Vite)
+- `node services/server.js` : démarre le backend (Express)
+- `npm install` : installe les dépendances du frontend
+- `npm install` (dans chaque dossier de service) : installe les dépendances backend
+
+---
+
+## 📝 Variables d’environnement
+
+Crée un fichier `.env` à la racine de `Portfolio` :
+
+```env
+JWT_SECRET=change_me
+PORT=4002
+```
+
+---
+
+## 🧹 Nettoyage & bonnes pratiques
+
+- Les fichiers sensibles et volumineux (`node_modules`, `.env`, etc.) sont ignorés grâce au `.gitignore`.
+- Les tokens JWT sont à garder secrets (ne pas versionner le `.env`).
+- Pour la production, change la valeur de `JWT_SECRET` !
+
+---
+
+## 📱 Fonctionnalités à venir
+
+- PWA (Progressive Web App)
+- Page de profil utilisateur
+- Suppression de compte utilisateur
+- Améliorations visuelles et accessibilité
+
+---
+
+## 🙋‍♂️ Auteur
+
+Projet réalisé par [Slingod](https://github.com/Slingod>).
+
+---
+
+## 📄 Licence
+
+Ce projet est sous licence MIT.
+
+---
+
+> Pour toute question ou suggestion, ouvre une issue ou contacte-moi sur GitHub !
+
+W7/D3/Portfolio$ node services/server.js "Backend"
+DEV/W7/D3/Portfolio$ npm run dev "Front"
+
+Aujourd'hui je doit : Mettre le PWA
+La page Profile
+Supprimé le compte si j'en suis l'autheur
+supprimé mon Post si j'en suis l'autheur
