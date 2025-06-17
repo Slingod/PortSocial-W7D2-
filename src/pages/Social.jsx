@@ -11,6 +11,9 @@ export default function Social() {
   const [newContent, setNewContent] = useState('');
   const [error, setError] = useState(null);
 
+  // Fonction pour gérer les différents formats d’ID
+  const getPostId = (post) => post._id || post.id || null;
+
   useEffect(() => {
     fetch(`${API}/posts`, {
       headers: { Authorization: `Bearer ${token}` },
@@ -58,7 +61,36 @@ export default function Social() {
       });
   };
 
+  const deletePost = (id) => {
+    if (!id) {
+      setError('ID du post manquant.');
+      return;
+    }
+
+    if (!window.confirm('Voulez-vous vraiment supprimer ce post ?')) return;
+
+    fetch(`${API}/posts/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error(`Erreur lors de la suppression. Code ${res.status}`);
+        setPosts(posts.filter((post) => getPostId(post) !== id));
+      })
+      .catch((err) => {
+        console.error(err);
+        setError('Erreur lors de la suppression du post.');
+      });
+  };
+
   const likePost = (id) => {
+    if (!id) {
+      setError('ID du post manquant.');
+      return;
+    }
+
     fetch(`${API}/posts/${id}/like`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${token}` },
@@ -68,12 +100,17 @@ export default function Social() {
         return res.json();
       })
       .then((updatedPost) => {
-        setPosts(posts.map((post) => (post.id === id ? updatedPost : post)));
+        setPosts(posts.map((post) => getPostId(post) === id ? updatedPost : post));
       })
       .catch(() => setError('Erreur lors du like.'));
   };
 
   const dislikePost = (id) => {
+    if (!id) {
+      setError('ID du post manquant.');
+      return;
+    }
+
     fetch(`${API}/posts/${id}/dislike`, {
       method: 'POST',
       headers: { Authorization: `Bearer ${token}` },
@@ -83,7 +120,7 @@ export default function Social() {
         return res.json();
       })
       .then((updatedPost) => {
-        setPosts(posts.map((post) => (post.id === id ? updatedPost : post)));
+        setPosts(posts.map((post) => getPostId(post) === id ? updatedPost : post));
       })
       .catch(() => setError('Erreur lors du dislike.'));
   };
@@ -91,6 +128,7 @@ export default function Social() {
   return (
     <div className="social-page">
       <h1>Social</h1>
+      {user && <h2 className="greeting">Bonjour {user.username}</h2>}
       {error && <p className="error">{error}</p>}
       {user ? (
         <>
@@ -107,19 +145,31 @@ export default function Social() {
           />
           <button onClick={createPost}>Publier</button>
           <ul>
-            {posts.map((post) => (
-              <li key={post.id} className="post-card">
-                <div className="post-header">
-                  <h3>{post.title}</h3>
-                  <small>Auteur: {post.author}</small>
-                </div>
-                <p>{post.content}</p>
-                <div className="post-actions">
-                  <button onClick={() => likePost(post.id)}>👍 {post.likes}</button>
-                  <button onClick={() => dislikePost(post.id)}>👎 {post.dislikes}</button>
-                </div>
-              </li>
-            ))}
+            {posts.map((post) => {
+              const postId = getPostId(post);
+              return (
+                <li key={postId} className="post-card">
+                  <div className="post-header">
+                    <h3>{post.title}</h3>
+                    <small>Auteur: {post.author}</small>
+                    {user?.username === post.author && (
+                      <button
+                        className="delete-btn"
+                        onClick={() => deletePost(postId)}
+                        title="Supprimer ce post"
+                      >
+                        🗑
+                      </button>
+                    )}
+                  </div>
+                  <p>{post.content}</p>
+                  <div className="post-actions">
+                    <button onClick={() => likePost(postId)}>👍 {post.likes || 0}</button>
+                    <button onClick={() => dislikePost(postId)}>👎 {post.dislikes || 0}</button>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </>
       ) : (

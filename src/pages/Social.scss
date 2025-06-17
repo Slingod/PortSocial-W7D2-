@@ -1,75 +1,84 @@
 @use '../styles/_variables' as vars;
 @use 'sass:math';
 
+/* ============================
+   Classes utilitaires globales
+============================ */
+.card-container {
+  position: relative;
+  margin-bottom: 1.5rem;
+  border-radius: vars.$border-radius;
+  overflow: hidden;
+}
+
+.card-twilight {
+  background: var(--card-twilight);
+  background-size: 200% 200%;
+  z-index: -1;
+  animation: twilight 8s ease infinite;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: vars.$border-radius;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ============================
+   Animations
+============================ */
+@keyframes twilight {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ============================
+   Modes jour/nuit
+============================ */
+.day-mode {
+  .glass-effect {
+    background: rgba(240, 240, 240, 0.8);
+    border: 1px solid rgba(150, 150, 150, 0.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-twilight {
+    background: linear-gradient(135deg, rgba(255, 153, 102, 0.8), rgba(255, 102, 153, 0.8), rgba(153, 102, 255, 0.8));
+  }
+}
+
+.night-mode {
+  .card-twilight {
+    background: linear-gradient(
+      135deg,
+      rgba(247, 0, 255, 0.7),
+      rgba(255, 165, 0, 0.7),
+      rgba(255, 255, 0, 0.7)
+    );
+  }
+}
+
+/* ============================
+   Page Social
+============================ */
 .social-page {
   padding: 2rem;
   max-width: 800px;
   margin: auto;
 
-  // Styles partagés (comme sur Home)
-  .card-container {
-    position: relative;
-    margin-bottom: 1.5rem;
-    border-radius: vars.$border-radius;
-    overflow: hidden;
-  }
-
-  .card-twilight {
-    background: var(--card-twilight);
-    background-size: 200% 200%;
-    z-index: -1;
-    animation: twilight 8s ease infinite;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: vars.$border-radius;
-  }
-
-  @keyframes twilight {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-
-  .glass-effect {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-  }
-
-  // Modes jour/nuit
-  .day-mode {
-    .glass-effect {
-      background: rgba(240, 240, 240, 0.8);
-      border: 1px solid rgba(150, 150, 150, 0.5);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    .card-twilight {
-      background: linear-gradient(135deg, rgba(255, 153, 102, 0.8), rgba(255, 102, 153, 0.8), rgba(153, 102, 255, 0.8));
-    }
-  }
-
-  .night-mode {
-    .card-twilight {
-      background: linear-gradient(
-        135deg,
-        rgba(247, 0, 255, 0.7),
-        rgba(255, 165, 0, 0.7),
-        rgba(255, 255, 0, 0.7)
-      );
-    }
-  }
-
-  // Titre
   h1 {
     text-align: center;
     color: var(--link-color);
@@ -98,7 +107,9 @@
     }
   }
 
-  // Liste des posts
+  /* ============================
+     Liste des posts
+  ============================= */
   ul {
     list-style: none;
     padding: 0;
@@ -149,7 +160,9 @@
     }
   }
 
-  // Carte individuelle de post
+  /* ============================
+     Carte individuelle de post
+  ============================= */
   .post-card {
     @extend .card-container;
     @extend .glass-effect;
@@ -203,5 +216,29 @@
         }
       }
     }
+  }
+}
+
+/* ============================
+   Divers
+============================ */
+.greeting {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--link-color);
+}
+
+.delete-btn {
+  background: transparent;
+  border: none;
+  color: crimson;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+
+  &:hover {
+    color: darkred;
+    transform: scale(1.1);
   }
 }
